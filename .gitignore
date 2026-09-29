@@ -1,0 +1,24 @@
+# Secrets
+.env
+
+# Python / Flask
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# Node.js (si tu prends Node à la place de Flask)
+node_modules/
+
+# Données MySQL locales (si jamais tu montes un dossier au lieu d'un volume)
+db_data/
+*.sql.bak
+
+# Logs
+*.log
+
+# Éditeurs / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
