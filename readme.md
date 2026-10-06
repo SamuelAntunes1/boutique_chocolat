@@ -1,4 +1,4 @@
-# Maison Cacao — Boutique de démonstration
+# Maison Cacao - Boutique de démonstration
 
 Projet réalisé pour le module I347. L'application correspond à une stack web composée d'un frontend statique, d'une API Flask et d'une base MySQL.
 
