@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Panier — Maison Cacao</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header class="site-header">
+    <a class="brand" href="index.html"><span>Maison</span> Cacao</a>
+    <nav class="main-nav" aria-label="Navigation principale">
+        <a href="index.html">Boutique</a>
+        <a class="active cart-link" href="panier.html">Panier <span class="cart-count" data-cart-count>0</span></a>
+    </nav>
+</header>
+
+<main class="section cart-page">
+    <div class="page-heading"><p class="eyebrow">Ta sélection</p><h1>Panier</h1></div>
+    <div class="cart-layout">
+        <section>
+            <div id="cart-empty" class="empty-state" hidden>
+                <h2>Ton panier est vide.</h2>
+                <p>Découvre le catalogue et ajoute quelques chocolats.</p>
+                <a class="button" href="index.html">Voir la boutique</a>
+            </div>
+            <div id="cart-list" class="cart-list"></div>
+        </section>
+        <aside id="cart-summary" class="summary-card" hidden>
+            <p class="eyebrow">Résumé</p>
+            <div class="summary-line"><span id="summary-count">0 article</span><span>Livraison offerte</span></div>
+            <div class="summary-total"><span>Total</span><strong id="summary-total">CHF 0.00</strong></div>
+            <a class="button button-full" href="commande.html">Passer la commande</a>
+            <a class="secondary-link" href="index.html">Continuer mes achats</a>
+        </aside>
+    </div>
+</main>
+
+<footer class="site-footer"><span>Maison Cacao</span><span>Projet I347 · CPNV</span></footer>
+<script src="../js/api.js"></script>
+<script src="../js/panier.js"></script>
+</body>
+</html>

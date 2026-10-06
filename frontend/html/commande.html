@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Commande — Maison Cacao</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header class="site-header">
+    <a class="brand" href="index.html"><span>Maison</span> Cacao</a>
+    <nav class="main-nav" aria-label="Navigation principale">
+        <a href="index.html">Boutique</a>
+        <a class="cart-link" href="panier.html">Panier <span class="cart-count" data-cart-count>0</span></a>
+    </nav>
+</header>
+
+<main class="section checkout-page">
+    <a class="back-link" href="panier.html">← Retour au panier</a>
+    <div class="page-heading"><p class="eyebrow">Dernière étape</p><h1>Finaliser la commande</h1></div>
+
+    <div id="order-confirmation" class="confirmation-card" hidden></div>
+
+    <div class="checkout-layout">
+        <form id="checkout-form" class="checkout-form">
+            <h2>Adresse de livraison</h2>
+            <div class="form-grid">
+                <label class="field field-full"><span>Nom complet</span><input id="nom" name="nom" type="text" minlength="2" maxlength="100" autocomplete="name" required></label>
+                <label class="field field-full"><span>E-mail</span><input id="email" name="email" type="email" maxlength="190" autocomplete="email" required></label>
+                <label class="field field-full"><span>Adresse</span><input name="adresse" type="text" maxlength="255" autocomplete="street-address" required></label>
+                <label class="field"><span>NPA</span><input name="npa" type="text" maxlength="20" autocomplete="postal-code" required></label>
+                <label class="field"><span>Ville</span><input name="ville" type="text" maxlength="100" autocomplete="address-level2" required></label>
+            </div>
+            <p class="form-note">Aucun paiement réel n’est effectué dans cette application de démonstration.</p>
+            <div id="order-message" hidden></div>
+            <button id="submit-order" class="button button-full" type="submit">Confirmer la commande</button>
+        </form>
+
+        <aside id="order-summary-card" class="summary-card">
+            <p class="eyebrow">Ta commande</p>
+            <div id="order-items" class="order-items"></div>
+            <div class="summary-total"><span>Total</span><strong id="order-total">CHF 0.00</strong></div>
+        </aside>
+    </div>
+</main>
+
+<footer class="site-footer"><span>Maison Cacao</span><span>Projet I347 · CPNV</span></footer>
+<script src="../js/api.js"></script>
+<script src="../js/commande.js"></script>
+</body>
+</html>

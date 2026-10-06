@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Boutique de chocolats artisanaux.">
+    <title>Maison Cacao — Chocolats artisanaux</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header class="site-header">
+    <a class="brand" href="index.html"><span>Maison</span> Cacao</a>
+    <nav class="main-nav" aria-label="Navigation principale">
+        <a class="active" href="index.html">Boutique</a>
+        <a href="#histoire">Notre maison</a>
+        <a class="cart-link" href="panier.html">Panier <span class="cart-count" data-cart-count>0</span></a>
+    </nav>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="hero-copy">
+            <p class="eyebrow">Chocolaterie artisanale · Suisse</p>
+            <h1>Du cacao choisi avec soin, simplement.</h1>
+            <p>Une petite collection de tablettes et pralinés préparés pour mettre en avant l’origine, le goût et la texture.</p>
+            <a class="button" href="#catalogue">Découvrir la collection</a>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+            <span class="hero-bar"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+            <span class="cocoa-orbit orbit-one"></span>
+            <span class="cocoa-orbit orbit-two"></span>
+        </div>
+    </section>
+
+    <section id="catalogue" class="section catalogue-section">
+        <div class="section-heading">
+            <div>
+                <p class="eyebrow">La collection</p>
+                <h2>Nos chocolats</h2>
+            </div>
+            <div class="filters">
+                <label>
+                    <span>Rechercher</span>
+                    <input id="search" type="search" placeholder="Nom, origine…">
+                </label>
+                <label>
+                    <span>Catégorie</span>
+                    <select id="category"><option value="">Toutes les catégories</option></select>
+                </label>
+            </div>
+        </div>
+        <div id="product-grid" class="product-grid"><p class="muted">Chargement du catalogue…</p></div>
+        <div id="catalogue-empty" class="empty-state" hidden>Aucun chocolat ne correspond à ces critères.</div>
+    </section>
+
+    <section id="histoire" class="section story-section">
+        <div>
+            <p class="eyebrow">Notre maison</p>
+            <h2>Peu d’ingrédients, beaucoup de caractère.</h2>
+        </div>
+        <p>Maison Cacao est une boutique de démonstration réalisée autour d’une architecture simple : un frontend statique, une API Flask et une base MySQL. Le catalogue, les stocks et les commandes sont gérés par le backend.</p>
+    </section>
+</main>
+
+<footer class="site-footer"><span>Maison Cacao</span><span>Projet I347 · CPNV</span></footer>
+<script src="../js/api.js"></script>
+<script src="../js/catalogue.js"></script>
+</body>
+</html>
