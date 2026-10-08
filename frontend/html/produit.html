@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Produit — Maison Cacao</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header class="site-header">
+    <a class="brand" href="index.html"><span>Maison</span> Cacao</a>
+    <nav class="main-nav" aria-label="Navigation principale">
+        <a href="index.html">Boutique</a>
+        <a class="cart-link" href="panier.html">Panier <span class="cart-count" data-cart-count>0</span></a>
+    </nav>
+</header>
+
+<main class="section product-page">
+    <a class="back-link" href="index.html">← Retour à la boutique</a>
+    <div id="product-detail" class="product-detail"><p class="muted">Chargement du produit…</p></div>
+</main>
+
+<footer class="site-footer"><span>Maison Cacao</span><span>Projet I347 · CPNV</span></footer>
+<script src="../js/api.js"></script>
+<script>
+    async function loadProduct() {
+        const container = document.getElementById("product-detail");
+        const id = Number(new URLSearchParams(window.location.search).get("id"));
+        if (!Number.isInteger(id) || id <= 0) {
+            container.innerHTML = '<div class="notice notice-error">Identifiant de produit invalide.</div>';
+            return;
+        }
+
+        try {
+            const product = await apiRequest(`/produits/${id}`);
+            document.title = `${product.nom} — Maison Cacao`;
+            container.innerHTML = `
+                <div class="detail-visual">
+                    <span class="detail-percent">${product.cacao}%</span>
+                    <span class="detail-bar" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+                </div>
+                <div class="detail-copy">
+                    <p class="eyebrow">${escapeHtml(product.categorie)} · ${escapeHtml(product.origine)}</p>
+                    <h1>${escapeHtml(product.nom)}</h1>
+                    <p class="detail-description">${escapeHtml(product.description)}</p>
+                    <dl class="spec-list">
+                        <div><dt>Cacao</dt><dd>${product.cacao}%</dd></div>
+                        <div><dt>Origine</dt><dd>${escapeHtml(product.origine)}</dd></div>
+                        <div><dt>Stock</dt><dd>${product.stock} pièce${product.stock > 1 ? "s" : ""}</dd></div>
+                    </dl>
+                    <div class="detail-buy">
+                        <strong>${formatPrice(product.prix)}</strong>
+                        <label class="quantity-field">Quantité <input id="quantity" type="number" min="1" max="${product.stock}" value="1"></label>
+                        <button id="add-detail" class="button" ${product.stock < 1 ? "disabled" : ""}>${product.stock < 1 ? "Épuisé" : "Ajouter au panier"}</button>
+                    </div>
+                </div>
+            `;
+
+            const button = document.getElementById("add-detail");
+            if (!button.disabled) {
+                button.addEventListener("click", () => {
+                    const quantity = Math.max(1, Math.min(Number(document.getElementById("quantity").value) || 1, product.stock));
+                    addToCart(product, quantity);
+                    button.textContent = "Ajouté au panier";
+                });
+            }
+        } catch (error) {
+            container.innerHTML = `<div class="notice notice-error">${escapeHtml(error.message)}</div>`;
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", loadProduct);
+</script>
+</body>
+</html>

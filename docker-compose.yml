@@ -6,6 +6,12 @@ services:
     volumes:
       - db_data:/var/lib/mysql
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", 'mysql --protocol=TCP --host=127.0.0.1 --user="$$MYSQL_USER" --password="$$MYSQL_PASSWORD" --database="$$MYSQL_DATABASE" --execute="SELECT 1" >/dev/null 2>&1']
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
     networks:
       - backend-net
 
@@ -13,19 +19,34 @@ services:
     # utilise backend/Dockerfile
     build: ./backend
     env_file: .env
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: ${MYSQL_DATABASE:-boutique}
+      DB_USER: ${MYSQL_USER:-boutique_user}
+      DB_PASSWORD: ${MYSQL_PASSWORD:?Définir MYSQL_PASSWORD dans .env}
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:5000/api/health', timeout=3)"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
     networks:
       - backend-net
       - frontend-net
 
   nginx:
     # utilise nginx/Dockerfile
-    build: ./nginx
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
     ports:
       - "80:80"
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
     networks:
       - frontend-net
 
